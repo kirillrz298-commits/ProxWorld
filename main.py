@@ -20,7 +20,7 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)
     ]
 )
-logger = logging.getLogger("ProxGriefBot")
+logger = logging.getLogger("ProxWorldBot")
 
 
 async def start_dummy_web_server():
@@ -33,7 +33,7 @@ async def start_dummy_web_server():
         app = web.Application()
 
         async def handle_ping(request):
-            return web.Response(text="Bot is running OK! ProxGrief support bot.")
+            return web.Response(text="Bot is running OK! ProxWorld support bot.")
 
         app.router.add_get("/", handle_ping)
         app.router.add_get("/health", handle_ping)

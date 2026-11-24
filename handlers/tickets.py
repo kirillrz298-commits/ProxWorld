@@ -45,10 +45,11 @@ async def notify_operators_about_new_ticket(bot, ticket_id: int, user, nick: str
     """Рассылка уведомления операторам о новом тикете."""
     username_str = f"@{user.username}" if user.username else "нет username"
     notification_text = (
-        f"🔔 **НОВОЕ ОБРАЩЕНИЕ #{ticket_id}**\n\n"
-        f"👤 **Игрок:** {nick}\n"
-        f"🆔 **Telegram ID:** `{user.id}` ({username_str})\n"
-        f"📌 **Тема:** {topic}\n\n"
+        f"╭─ 🔔 **НОВОЕ ОБРАЩЕНИЕ #{ticket_id}** ──────\n"
+        f"│ 👤 **Игрок:** `{nick}`\n"
+        f"│ 🆔 **Telegram ID:** `{user.id}` ({username_str})\n"
+        f"│ 📌 **Тема:** {topic}\n"
+        f"╰──────────────────────────────────\n\n"
         f"📝 **Суть проблемы:**\n{text}"
     )
     
@@ -203,11 +204,12 @@ async def process_description(message: Message, state: FSMContext):
     # Уведомляем игрока
     is_op = await is_operator_or_admin(message.from_user.id, config.ADMIN_IDS)
     success_text = (
-        f"🎉 **Обращение #{ticket_id} успешно создано!**\n\n"
-        f"📌 **Тема:** {topic}\n"
-        f"🎮 **Никнейм:** `{player_nick}`\n"
-        f"⏳ Мы уже уведомили свободных операторов. Вам ответят в ближайшее время!\n\n"
-        f"💬 **Все ваши следующие сообщения в этом чате автоматически поступят оператору.**"
+        f"╭─ 🎉 **Обращение #{ticket_id} создано!** ─────\n"
+        f"│ 📌 **Тема:** {topic}\n"
+        f"│ 🎮 **Никнейм:** `{player_nick}`\n"
+        f"╰──────────────────────────────────\n\n"
+        f"⏳ Мы уведомили дежурных операторов — вам ответят в ближайшее время!\n\n"
+        f"💬 *Все ваши сообщения в этом чате автоматически передаются в обращение.*"
     )
     
     await message.answer(success_text, reply_markup=get_main_reply_keyboard(is_op), parse_mode="Markdown")

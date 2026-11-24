@@ -19,15 +19,15 @@ class Config:
     AI_ENABLED: bool = os.getenv("AI_ENABLED", "True").lower() in ("true", "1", "yes")
     
     # Server Details
-    SERVER_NAME: str = os.getenv("SERVER_NAME", "ProxGrief")
-    SERVER_IP: str = os.getenv("SERVER_IP", "mc.proxgrief.ru")
-    SERVER_PORT: str = os.getenv("SERVER_PORT", "25565")
-    SERVER_VERSIONS: str = os.getenv("SERVER_VERSIONS", "1.16.5 - 1.20.4")
-    SERVER_SITE: str = os.getenv("SERVER_SITE", "https://proxgrief.ru")
-    SERVER_DONATE_URL: str = os.getenv("SERVER_DONATE_URL", "https://proxgrief.ru/donate")
-    SERVER_RULES_URL: str = os.getenv("SERVER_RULES_URL", "https://proxgrief.ru/rules")
-    SERVER_VK_URL: str = os.getenv("SERVER_VK_URL", "https://vk.com/proxgrief")
-    SERVER_DISCORD_URL: str = os.getenv("SERVER_DISCORD_URL", "https://discord.gg/proxgrief")
+    SERVER_NAME: str = os.getenv("SERVER_NAME", "ProxWorld")
+    SERVER_IP: str = os.getenv("SERVER_IP", "d5.rustix.me:26015")
+    SERVER_PORT: str = os.getenv("SERVER_PORT", "26015")
+    SERVER_VERSIONS: str = os.getenv("SERVER_VERSIONS", "1.16.5 - 1.21 и выше")
+    SERVER_SITE: str = os.getenv("SERVER_SITE", "@DesTrooyda")
+    SERVER_DONATE_URL: str = os.getenv("SERVER_DONATE_URL", "https://t.me/DesTrooyda")
+    SERVER_RULES_URL: str = os.getenv("SERVER_RULES_URL", "https://t.me/DesTrooyda")
+    SERVER_VK_URL: str = os.getenv("SERVER_VK_URL", "https://t.me/DesTrooyda")
+    SERVER_DISCORD_URL: str = os.getenv("SERVER_DISCORD_URL", "https://t.me/DesTrooyda")
 
     def __post_init__(self):
         raw_admins = os.getenv("ADMIN_IDS", "")

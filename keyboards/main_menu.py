@@ -42,9 +42,9 @@ def get_login_issues_inline() -> InlineKeyboardMarkup:
 def get_donate_issues_inline() -> InlineKeyboardMarkup:
     """Клавиатура для вопросов по донату."""
     buttons = [
+        [InlineKeyboardButton(text="🛒 Написать по поводу доната (@DesTrooyda)", url="https://t.me/DesTrooyda")],
         [InlineKeyboardButton(text="⏳ Донат не пришел вовремя", callback_data="donate_delayed")],
         [InlineKeyboardButton(text="🔄 Перенос привилегии", callback_data="donate_transfer")],
-        [InlineKeyboardButton(text="🛒 Перейти в донат-магазин", url=config.SERVER_DONATE_URL)],
         [InlineKeyboardButton(text="👨‍💻 Связаться с оператором", callback_data="create_ticket_donate")],
         [InlineKeyboardButton(text="🔙 Назад в меню", callback_data="back_to_menu")]
     ]
@@ -78,10 +78,8 @@ def get_faq_inline() -> InlineKeyboardMarkup:
 def get_server_info_inline() -> InlineKeyboardMarkup:
     """Ссылки на ресурсы сервера."""
     buttons = [
-        [InlineKeyboardButton(text="🌐 Наш Сайт", url=config.SERVER_SITE)],
-        [InlineKeyboardButton(text="💎 Донат Магазин", url=config.SERVER_DONATE_URL)],
-        [InlineKeyboardButton(text="📱 Группа ВКонтакте", url=config.SERVER_VK_URL)],
-        [InlineKeyboardButton(text="💬 Discord сервер", url=config.SERVER_DISCORD_URL)],
+        [InlineKeyboardButton(text="💎 Донат / Покупки (@DesTrooyda)", url="https://t.me/DesTrooyda")],
+        [InlineKeyboardButton(text="👨‍💻 Связь с оператором", callback_data="start_ticket_creation")],
         [InlineKeyboardButton(text="🔙 Назад в меню", callback_data="back_to_menu")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
