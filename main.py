@@ -1,6 +1,8 @@
 import asyncio
 import logging
+import os
 import sys
+from aiohttp import web
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
@@ -19,6 +21,30 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger("ProxGriefBot")
+
+
+async def start_dummy_web_server():
+    """Запуск легкого HTTP-сервера для Render (Web Service), чтобы избежать ошибки таймаута порта."""
+    port_env = os.getenv("PORT")
+    if not port_env:
+        return
+    try:
+        port = int(port_env)
+        app = web.Application()
+
+        async def handle_ping(request):
+            return web.Response(text="Bot is running OK! ProxGrief support bot.")
+
+        app.router.add_get("/", handle_ping)
+        app.router.add_get("/health", handle_ping)
+
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, "0.0.0.0", port)
+        await site.start()
+        logger.info(f"🌐 HTTP health-сервер для Render запущен на порту {port}")
+    except Exception as e:
+        logger.warning(f"Не удалось запустить вспомогательный веб-сервер: {e}")
 
 
 async def setup_bot_commands(bot: Bot):
@@ -85,6 +111,7 @@ async def main():
             logger.info("ℹ️ ИИ-помощник работает в режиме встроенной базы знаний (API ключ пока не указан в .env).")
 
         await bot.delete_webhook(drop_pending_updates=True)
+        await start_dummy_web_server()
         await dp.start_polling(bot)
     except Exception as e:
         logger.critical(f"Критическая ошибка работы бота: {e}", exc_info=True)
